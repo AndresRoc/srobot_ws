@@ -1,0 +1,8 @@
+prefix=/home/andres-roc/srobot_ws/install
+
+Name: turtlebot_gazebo
+Description: Description of turtlebot_gazebo
+Version: 2.2.3
+Cflags: 
+Libs: -L/home/andres-roc/srobot_ws/install/lib 
+Requires: 

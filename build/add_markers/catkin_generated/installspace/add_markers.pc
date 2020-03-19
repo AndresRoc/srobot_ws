@@ -1,0 +1,8 @@
+prefix=/home/andres-roc/srobot_ws/install
+
+Name: add_markers
+Description: Description of add_markers
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/andres-roc/srobot_ws/install/lib 
+Requires: 

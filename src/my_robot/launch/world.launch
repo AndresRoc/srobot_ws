@@ -1,0 +1,40 @@
+<?xml version = "1.0"?>
+<launch>
+
+  <arg name="x" default="-5.0"/>
+  <arg name="y" default="-9.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0.0"/>
+
+<!-- send urdf to param server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'" />
+
+<!-- Send fake joint values-->
+<!--THIS IS NOT GOING TO WORK UNLESS YOU CLONE https://github.com/ros/joint_state_publisher.git INTO /opt/ros/kinetic/share$  -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="false"/>
+  </node>
+
+<!-- Send robot states to tf -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+
+
+  <include file = "$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value ="$(find my_robot)/worlds/andres_world2.world"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro  --inorder '$(find my_robot)/urdf/my_robot.xacro'" />
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+        args="-urdf -param robot_description -model my_robot 
+              -x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args = "initRVIZ" respawn="false"/>
+
+
+</launch>

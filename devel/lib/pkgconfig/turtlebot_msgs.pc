@@ -1,0 +1,8 @@
+prefix=/home/andres-roc/srobot_ws/devel
+
+Name: turtlebot_msgs
+Description: Description of turtlebot_msgs
+Version: 2.2.1
+Cflags: -I/home/andres-roc/srobot_ws/devel/include
+Libs: -L/home/andres-roc/srobot_ws/devel/lib 
+Requires: std_msgs sensor_msgs std_srvs message_runtime
